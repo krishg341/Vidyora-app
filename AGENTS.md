@@ -23,6 +23,19 @@ npx expo install --fix      # fix incompatible package versions
 
 Run lint and typecheck before declaring any task done.
 
+## Backend (server/)
+
+The API server lives in `server/` — NestJS 12 + Fastify + Swagger (CommonJS) + TypeORM (PostgreSQL). It is a separate npm project with its own `package.json`.
+
+```bash
+npm run api                       # from the repo root: Postgres + pgAdmin (Docker) + API, Swagger at /docs
+npm --prefix server run build     # typecheck + build the API
+npm --prefix server run start:dev # API only, in watch mode
+```
+
+- Database stack: `docker-compose.yml` — Postgres on host port 5433, pgAdmin on http://localhost:5050 (user `admin@example.com` / password `admin`, pre-configured server "Vidyora Postgres", DB password `vidyora`).
+- The Class 6–10 curriculum is seeded into PostgreSQL on first boot from `server/src/database/seed-data.ts`; student progress lives in the `progress` table. Swagger is bound to `0.0.0.0` so it is reachable from any machine on the same network (URL printed at startup).
+
 ## Navigation & Routing
 
 - Use **Expo Router** for all navigation. Routes live in `src/app/` — every file there is a screen, `_layout.tsx` files define navigators. Keep non-route code (components, hooks, utils) outside `src/app/`.
