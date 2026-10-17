@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Vidyora Postgres",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "vidyora",
+      "Username": "vidyora",
+      "SSLMode": "prefer",
+      "Comment": "Vidyora API database (docker-compose)"
+    }
+  }
+}

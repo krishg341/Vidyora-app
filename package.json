@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "concurrently": "^10.0.6",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -37,7 +38,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "api": "npm --prefix server install --no-audit --no-fund && npm run db:up && npm --prefix server run start:dev",
+    "dev": "npm --prefix server install --no-audit --no-fund && npm run db:up && concurrently -n api,app -c blue,magenta \"npm --prefix server run start:dev\" \"expo start\"",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v"
   },
   "private": true
 }
